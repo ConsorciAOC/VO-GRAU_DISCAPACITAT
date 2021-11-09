@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<respostaConsultaDiscapacitatSimple xmlns="http://www.aocat.net/discapacitat">
+	<dadesPersona>
+		<nom>String</nom>
+		<cognoms>String</cognoms>
+		<dataNaixement>String</dataNaixement>
+	</dadesPersona>
+	<resposta>
+		<reconeixement>String</reconeixement>
+		<grupGrauDiscapacitat>0</grupGrauDiscapacitat>
+		<descripcioGrupGrauDiscapacitat>String</descripcioGrupGrauDiscapacitat>
+		<missatge>String</missatge>
+	</resposta>
+	<resultat>
+		<codiResultat>String</codiResultat>
+		<descripcio>String</descripcio>
+	</resultat>
+</respostaConsultaDiscapacitatSimple>
