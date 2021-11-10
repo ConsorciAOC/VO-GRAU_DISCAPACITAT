@@ -87,31 +87,33 @@ De l’schema associat a la resposta especifica, el servei informa les dades que
 | --- | --- |
 | /respostaConsultaDiscapacitatSimple/dadesPersona |Bloc de dades personals del titular consultat si s’ha informat a la petició. Per més detalls consulteu l’apartat 3.1.1.2 d’aquest mateix document. |
 | /respostaConsultaDiscapacitatSimple/resposta | Bloc de dades de la resposta a laconsulta. |
-| //resposta/reconeixement | Disposa del reconeixement de grau dediscapacitat:<li> NO TROBAT:noestrobaelciutadaalabasededades del SAD.<li>SI: el ciutadà té reconegut un grau dediscapacitat.<li> NO: el ciutadàno té reconegut un grau dediscapacitat.<li>EN TRÀMIT: el reconeixement del graudediscapacitatestàentràmit.<li> CADUCAT I PENDENT DE NOVAREVISIÓ: el reconeixement del grau dediscapacitat del ciutadà ha caducat i estàpendentd&#39;una nova revisió. |
-| //resposta/grupGrauDiscapacitat | Graudediscapacitat:<li> 1: pertany al grup 1, discapacitat del 0 % al 32 %.<li>2: pertany al grup 2, discapacitat del 33 % al 64 %.<li>3: pertany al grup 3, discapacitat del 65 % al 74 %.<li>4: pertany al grup 4, discapacitat del 75 % o més. |
-| //resposta/descripcioGrupGrauDiscapacitat | Descripció del grup de grau de discapacitat alquepertany el titular. |
-| //resposta/missatge | Descripció de la incidència detectada alrealitzarla consulta. |
+| //resposta/reconeixement | Disposa del reconeixement de grau dediscapacitat:<li> NO TROBAT:no estroba el ciutada a la base de dades del SAD.<li>SI: el ciutadà té reconegut un grau de discapacitat.<li> NO: el ciutadà no té reconegut un grau de discapacitat.<li>EN TRÀMIT: el reconeixement del grau de discapacitat està en tràmit.<li> CADUCAT I PENDENT DE NOVA REVISIÓ: el reconeixement del grau de discapacitat del ciutadà ha caducat i està pendent d&#39;una nova revisió. |
+| //resposta/grupGrauDiscapacitat | Grau de discapacitat:<li> 1: pertany al grup 1, discapacitat del 0 % al 32 %.<li>2: pertany al grup 2, discapacitat del 33 % al 64 %.<li>3: pertany al grup 3, discapacitat del 65 % al 74 %.<li>4: pertany al grup 4, discapacitat del 75 % o més. |
+| //resposta/descripcioGrupGrauDiscapacitat | Descripció del grup de grau de discapacitat al que pertany el titular. |
+| //resposta/missatge | Descripció de la incidència detectada al realitzar la consulta. |
 | //resultat/codiResultat | Codi de resultat de l’operació de consulta (vegeu apartat 0). |
 | //resultat/descripcio | Descripció del resultat.. |
 
-Segons el valor de *reconeixement* vindran informats els següents camps:
+Segons el valor de *reconeixement* vindran informats els següents camps:<br><li>NO TROBAT</li><ul><ul><li>Missatge (si amb les dades subministrades no es poden comprovar els requeriments demanats cal definir amb més precisió la consulta).</ul></ul></li>
+<li>SI</li>
+<ul><ul><li>Grup de grau de discapacitat.</ul></ul></li>
+<ul><ul><li>Descripció del grup de grau de discapacitat.</ul></ul></li>
+<ul><ul><li>Missatge (si l’expedient ha estat traslladat a altra comunitat).</ul></ul></li>
 
-<br><li>NO TROBAT<ul><ul><li>Missatge (si amb les dades subministrades no es poden comprovar els requeriments demanats cal definir amb més precisió la consulta).</ul>
-<li>SI<ul><li>Grup de grau de discapacitat.</ul>
-<ul><li>	Descripció del grup de grau de discapacitat.</ul>
-<ul><li>Missatge (si l’expedient ha estat traslladat a altra comunitat).</ul>
-<br><li>NO<ul><li> Missatge (si l’expedient està de baixa).</ul>
-<br><li>EN TRÀMIT<ul><li>Sense dades.</ul>
-<br><li>CADUCAT I PENDENT DE NOVA REVISIÓ
-<ul><li>Grup de grau de discapacitat.</ul></li>
-<ul><li>Descripció del grup de grau de discapacitat</ul></li>
+<li>NO</li>
+<ul><ul><li>Missatge (si l’expedient està de baixa).</ul></ul></li>
 
+<li>EN TRÀMIT</li>
+<ul><ul><li>Sense dades.</ul></ul></li>
 
-#### 3.1.2.1 Codis de resultat
+<li>CADUCAT I PENDENT DE NOVA REVISIÓ</li>
+<ul><ul><li>Grup de grau de discapacitat.</ul></ul></li>
+<ul><ul><li>Descripció del grup de grau de discapacitat</ul></ul></li>
+
+### 3.1.2.1 Codis de resultat
 
 <li>0: Operació realitzada correctament.
 <li>0502: Error en la comunicació amb l’emissor.
-
 
 ## 3.2	Grau de discapacitat – dades avançades (GRAU_DISCAPACITAT_TOTAL)
     
@@ -168,22 +170,34 @@ més detalls consulteu l’apartat 3.1.1.2 d’aquest mateix document. |
 ![4](captures/4.png)
 
 Segons el valor de l’element reconeixement s’informaran els següents elements a la resposta:
-<br><li>NO TROBAT<ul><li>Missatge (si amb les dades subministrades no es poden comprovar els requeriments demanats cal definir amb més precisió la consulta).</ul>
+<br><li>NO TROBAT
+<ul><ul><li>Missatge (si amb les dades subministrades no es poden comprovar els requeriments demanats cal definir amb més precisió la consulta).</ul></ul>
 
-<li>SI<ul><li>Grau de discapacitat</ul>
-<ul><li>Data efecte</ul><ul><li>Barem de dependència</ul><ul><li>Barem de mobilitat</ul><ul><li>Acompanyant per transport públic</ul><ul><li>Validesa del reconeixement</ul><ul><li>Data de venciment de la validesa (si el valor de validesa és PROVISIONAL)</ul><ul><li>Missatge (si l’expedient ha estat traslladat a altra comunitat)</ul>
+<li>SI
+<ul><ul><li>Grau de discapacitat</ul></ul>
+<ul><ul><li>Data efecte</ul></ul>
+<ul><ul><li>Barem de dependència</ul></ul>
+<ul><ul><li>Barem de mobilitat</ul></ul>
+<ul><ul><li>Acompanyant per transport públic</ul></ul>
+<ul><ul><li>Validesa del reconeixement</ul></ul>
+<ul><ul><li>Data de venciment de la validesa (si el valor de validesa és PROVISIONAL)</ul></ul>
+<ul><ul><li>Missatge (si l’expedient ha estat traslladat a altra comunitat)</ul></ul>
+
 <li>NO
-<ul><li>Missatge (si l’expedient està de baixa)</ul>
-<li>EN TRÀMIT<ul><li>Sense dades.</ul>
-<ul><li>CADUCAT I PENDENT DE NOVA REVISIÓ</ul>
-<ul><li>Grau de discapacitat.</ul>
-<ul><li>Data efecte.</ul>
-<ul><li>Barem de dependència.</ul>
-<ul><li>Barem de mobilitat.</ul>
-<ul><li>Acompanyant per transport públic.</ul>
-<ul><li>Validesa del reconeixement.</ul>
-<ul><li>Data de venciment de la validesa (si el valor de validesa és PROVISIONAL).</ul>
-<ul><li>Missatge (si l’expedient ha estat traslladat a altra comunitat).</ul>
+<ul><ul><li>Missatge (si l’expedient està de baixa)</ul></ul>
+
+<li>EN TRÀMIT
+<ul><ul><li>Sense dades.</ul></ul>
+
+<li>CADUCAT I PENDENT DE NOVA REVISIÓ</ul></ul>
+<ul><ul><li>Grau de discapacitat.</ul></ul>
+<ul><ul><li>Data efecte.</ul></ul>
+<ul><ul><li>Barem de dependència.</ul></ul>
+<ul><ul><li>Barem de mobilitat.</ul></ul>
+<ul><ul><li>Acompanyant per transport públic.</ul></ul>
+<ul><ul><li>Validesa del reconeixement.</ul></ul>
+<ul><ul><li>Data de venciment de la validesa (si el valor de validesa és PROVISIONAL).</ul></ul>
+<ul><ul><li>Missatge (si l’expedient ha estat traslladat a altra comunitat).</ul></ul>
 
 
 # 4 Joc de proves
