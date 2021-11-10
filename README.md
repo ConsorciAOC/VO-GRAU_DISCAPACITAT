@@ -1,1 +1,511 @@
-# VO-GRAU_DISCAPACITAT
+# VO-GRAU_DISCAPACITAT Document d&#39;integració del servei
+
+# **Via Oberta – Grau de discapacitat (ICASS)**
+
+
+**Històric de revisions**
+
+|**Versió** |**Data** |**Autor** |**Comentaris** |
+| --- | --- | --- | --- |
+|V1.0 |03/02/2010 |RogerNogueraArnau |Creaciódeldocument |
+|V1.2 |07/10/2010 |RogerNogueraArnau |Revisió |
+
+
+# 1 Introducció
+
+Aquest document detalla la missatgeria associada al servei de consulta del Grau de Discapacitat deldelServeialDisminuït(SAD)del&#39;InstitutCatalàd&#39;AssistènciaiServeisSocials(ICASSenendavant).
+
+Per poder realitzar la integració cal conèixer prèviament la següent documentació:
+
+- [Document de Missatgeria Genèrica de la PCI del Consorci AOC.][PCI]
+
+[PCI]:https://github.com/ConsorciAOC/PCI
+
+
+# 2 Transmissions de dades disponibles
+
+Les dades disponibles a través del servei són les que es presenten a continuació:
+
+| **EMISSOR** |
+| --- |
+| ICASS (Institut Català d'Assistència i Serveis Socials) |
+
+| **PRODUCTE** | **MODALITAT** | **DESCRIPCIO** |
+| --- | --- | --- |
+| **GRAU\_DISCAPACITAT** | GRAU\_DISCAPACITAT\_SIMPLE | Grau de discapacitat d’un ciutadà (dades bàsiques). |
+| **GRAU\_DISCAPACITAT** | GRAU\_DISCAPACITAT\_TOTAL | Grau de discapacitat d’un ciutadà (dades avançades). |
+
+Totes les consultes del producte tenen disponible la versió imprimible del resultat de la consulta en format PDF. Per més detalls adreceu-vos a l’apartat *Extensions de missatgeria* del document de [missatgeria genèrica.][PCI2]
+
+[PCI2]:https://github.com/ConsorciAOC/PCI
+
+# 3	Missatgeria dels serveis
+
+A continuació es detalla la missatgeria corresponent al bloc de dades específiques de les modalitats de consum del producte.
+
+## 3.1	Grau de discapacitat – dades bàsiques (GRAU_DISCAPACITAT_SIMPLE)
+
+
+### 3.1.1	Petició
+
+Aquesta modalitat permet consultar les dades bàsiques del grau de discapacitat d’un ciutadà informant:
+
+<li>El document identificatiu del titular a les dades genèriques de la missatgeria.
+
+<li>Alternativament, informant les dades personals a la missatgeria específica.
+ 
+
+#### 3.1.1.1	Dades genèriques
+
+| _Element_ | _Descripció_ |
+| --- | --- |
+| //DatosGenericos/Titular/TipoDocumentacion | Tipus de documentació (DNI/NIF o NIE). |
+| //DatosGenericos/Titular/Documentacion | Documentació. NIF en format DDDDDDDDL,NIE en format LDDDDDDDL (D:dígit,L:lletra). |
+
+
+#### 3.1.1.2	Dades específiques
+
+En cas de no disposar del document identificatiu del titular, el servei permet fer la consulta per les dades personals: nom, cognoms i data de naixement.
+
+| _Element_ | _Descripció_ |
+| --- | --- |
+| /peticioConsultaDiscapacitatSimple/dadesPersona | Bloc de dades personals del titular que es vol consultar. |
+| //dadesPersona/nom | Nom de la persona a consultar. En majúscules, sense accents ni dièresi i com a màxim de 16 caràcters. |
+| //dadesPersona/cognoms | Cognoms de la persona a consultar. En majúscules, sense accents ni dièresi i com a màxim de 35 caràcters. És necessari indicar els dos cognoms de la persona (si en té). |
+| //dadesPersona/dataNaixement | Data de naixement de la persona a consultar (DDMMAAAA). |
+
+![1](captures/1.png)
+
+
+### 3.1.2	Resposta – dades específiques
+
+De l’schema associat a la resposta especifica, el servei informa les dades que es detallen a continuació.
+
+![2](captures/2.png)
+
+| _Element_ | _Descripció_ |
+| --- | --- |
+| /respostaConsultaDiscapacitatSimple/dadesPersona |Bloc de dades personals del titular consultat si s’ha informat a la petició. Per més detalls consulteu l’apartat 3.1.1.2 d’aquest mateix document. |
+| /respostaConsultaDiscapacitatSimple/resposta | Bloc de dades de la resposta a laconsulta. |
+| //resposta/reconeixement | Disposa del reconeixement de grau dediscapacitat:<li> NO TROBAT:noestrobaelciutadaalabasededades del SAD.<li>SI: el ciutadà té reconegut un grau dediscapacitat.<li> NO: el ciutadàno té reconegut un grau dediscapacitat.<li>EN TRÀMIT: el reconeixement del graudediscapacitatestàentràmit.<li> CADUCAT I PENDENT DE NOVAREVISIÓ: el reconeixement del grau dediscapacitat del ciutadà ha caducat i estàpendentd&#39;una nova revisió. |
+| //resposta/grupGrauDiscapacitat | Graudediscapacitat:<li> 1: pertany al grup 1, discapacitat del 0 % al 32 %.<li>2: pertany al grup 2, discapacitat del 33 % al 64 %.<li>3: pertany al grup 3, discapacitat del 65 % al 74 %.<li>4: pertany al grup 4, discapacitat del 75 % o més. |
+| //resposta/descripcioGrupGrauDiscapacitat | Descripció del grup de grau de discapacitat alquepertany el titular. |
+| //resposta/missatge | Descripció de la incidència detectada alrealitzarla consulta. |
+| //resultat/codiResultat | Codi de resultat de l’operació de consulta (vegeu apartat 0). |
+| //resultat/descripcio | Descripció del resultat.. |
+
+Segons el valor de *reconeixement* vindran informats els següents camps:
+
+<br><li>NO TROBAT<ul><ul><li>Missatge (si amb les dades subministrades no es poden comprovar els requeriments demanats cal definir amb més precisió la consulta).</ul>
+<li>SI<ul><li>Grup de grau de discapacitat.</ul>
+<ul><li>	Descripció del grup de grau de discapacitat.</ul>
+<ul><li>Missatge (si l’expedient ha estat traslladat a altra comunitat).</ul>
+<br><li>NO<ul><li> Missatge (si l’expedient està de baixa).</ul>
+<br><li>EN TRÀMIT<ul><li>Sense dades.</ul>
+<br><li>CADUCAT I PENDENT DE NOVA REVISIÓ
+<ul><li>Grup de grau de discapacitat.</ul></li>
+<ul><li>Descripció del grup de grau de discapacitat</ul></li>
+
+
+#### 3.1.2.1 Codis de resultat
+
+<li>0: Operació realitzada correctament.
+<li>0502: Error en la comunicació amb l’emissor.
+
+
+## 3.2	Grau de discapacitat – dades avançades (GRAU_DISCAPACITAT_TOTAL)
+    
+### 3.2.1 Petició
+
+Aquesta modalitat permet consultar les dades avançades del grau de discapacitat d’un ciutadà informant:<br><li>El document identificatiu del titular a les dades genèriques de la missatgeria.
+<li>Alternativament, informant les dades personals a la missatgeria específica.
+
+
+      
+#### 3.2.1.1 Dades genèriques
+
+| _Element_ | _Descripció_ |
+| --- | --- |
+| //DatosGenericos/Titular/TipoDocumentacion | Documentació. NIF en format DDDDDDDDL, NIE en format LDDDDDDDL (D: dígit, L: lletra). |
+| //DatosGenericos/Titular/Documentacion | Documentació. |
+
+
+#### 3.2.1.2 Dadeses pecífiques
+
+Anàlogament a la modalitat anterior, en cas de no disposar del document identificatiu del titular, el servei permet fer la consulta per les dades personals: nom, cognoms i data de naixement.
+
+| _Element_ | _Descripció_ |
+| --- | --- |
+| /peticioConsultaDiscapacitatTotal/dadesPersona | Bloc de dades personals del titular que es volconsultar. |
+| //dadesPersona/nom | Nom de la persona a consultar. En majúscules, sense accents ni dièresi i com a màxim de 16 caràcters. |
+| //dadesPersona/cognoms | Cognoms de la persona a consultar. En majúscules, sense accents ni dièresi i com a màxim de 35 caràcters. És necessari indicar els dos cognoms de la persona (si en té). |
+| //dadesPersona/dataNaixement | Data de naixement de la persona a consultar (DDMMAAAA). |
+
+![3](captures/3.png)
+
+    
+### 3.2.2	Resposta – dades específiques
+
+De l’schema associat a la resposta especifica, el servei informa les dades que es detallen a continuació.
+
+| _Element_ | _Descripció_ |
+| --- | --- |
+| /respostaConsultaDiscapacitatTotal/dadesPersona | Bloc de dades personals del titular consultat si s’ha informat a la petició. Per
+més detalls consulteu l’apartat 3.1.1.2 d’aquest mateix document. |
+| /respostaConsultaDiscapacitatTotal/resposta | Bloc de dades de la resposta a la consulta. |
+| //resposta/reconeixement | Disposa del reconeixement de grau de discapacitat:<li>NO TROBAT: no es troba el ciutada a la base de dades del SAD.<li>SI: el ciutadà té reconegut un grau de discapacitat.<li>NO: el ciutadàno té reconegut un grau de discapacitat.<li>EN TRÀMIT: el reconeixement del grau de discapacitat està en tràmit.<li>CADUCAT I PENDENT DE NOVA REVISIÓ: el reconeixement del grau de discapacitat del ciutadà ha caducat i està pendent d’una nova revisió. |
+| //resposta/grauDiscapacitat | Grau de discapacitat indicat com a percentatge. |
+| //resposta/dataEfecte | Data efecte del grau de discapacitat (DDMMAAAA). |
+| //resposta/baremDependencia | Barem de dependència (SI / NO). SI: com a mínim té reconegut un 75% de discapacitat i un 25 del barem de dependència. |
+| //resposta/baremMobilitat | Té reconegut barem de mobilitat (S / N). Barem per determinar l'existència de dificultats per utilitzar transports col·lectius (annex 3 del Real Decreto 1971/1999, de 23 de desembre de procediment per al reconeixement, declaració i qualificació del grau de discapacitat).|
+| //resposta/acompanyantTransport | Necessita acompanyant per transport públic (S / N).|
+| //resposta/validesa | Validesa del reconeixement (DEFINITIU /PROVISIONAL). |
+| //resposta/dataVenciment | Data de venciment de la validesa si aquesta és PROVISIONAL (DDMMAAAA). |
+| //resposta/missatge | Descripció de la incidència detectada al realitzar la consulta.|
+| //resultat/codiResultat | Codi de resultat de l’operació de consulta (vegeu apartat 0). |
+| //resultat/descripcio | Descripció del resultat. |
+
+![4](captures/4.png)
+
+Segons el valor de l’element reconeixement s’informaran els següents elements a la resposta:
+<br><li>NO TROBAT<ul><li>Missatge (si amb les dades subministrades no es poden comprovar els requeriments demanats cal definir amb més precisió la consulta).</ul>
+
+<li>SI<ul><li>Grau de discapacitat</ul>
+<ul><li>Data efecte</ul><ul><li>Barem de dependència</ul><ul><li>Barem de mobilitat</ul><ul><li>Acompanyant per transport públic</ul><ul><li>Validesa del reconeixement</ul><ul><li>Data de venciment de la validesa (si el valor de validesa és PROVISIONAL)</ul><ul><li>Missatge (si l’expedient ha estat traslladat a altra comunitat)</ul>
+<li>NO
+<ul><li>Missatge (si l’expedient està de baixa)</ul>
+<li>EN TRÀMIT<ul><li>Sense dades.</ul>
+<ul><li>CADUCAT I PENDENT DE NOVA REVISIÓ</ul>
+<ul><li>Grau de discapacitat.</ul>
+<ul><li>Data efecte.</ul>
+<ul><li>Barem de dependència.</ul>
+<ul><li>Barem de mobilitat.</ul>
+<ul><li>Acompanyant per transport públic.</ul>
+<ul><li>Validesa del reconeixement.</ul>
+<ul><li>Data de venciment de la validesa (si el valor de validesa és PROVISIONAL).</ul>
+<ul><li>Missatge (si l’expedient ha estat traslladat a altra comunitat).</ul>
+
+
+# 4 Joc de proves
+
+L&#39;emissor final publica els següent [joc de proves a l&#39;entorn de pre-producció][proves] 
+
+[proves]: http://transversals.ctti.intranet.gencat.cat/sol-pica-iop-gene/grau_discapacitat/
+
+
+![image](https://user-images.githubusercontent.com/32306731/137281698-9dfc2044-94f7-487f-a7d6-9a4e0707feb3.png) En cas de tindre problemes per accedir als jocs de proves, si us plau, obre un tiquet a través del [formulari][form]
+
+[form]:https://www.aoc.cat/portal-suport/peticio-integradors/idservei/integracio/
+
+
+# Annex–exemple de missatges
+
+## Grau discapacitat bàsiques (GRAU_DISCAPACITAT_SIMPLE)
+
+### Exemple petició
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<Peticion xmlns="http://gencat.net/scsp/esquemes/peticion">
+	<Atributos>
+		<IdPeticion>SAD_000</IdPeticion>
+		<NumElementos>1</NumElementos>
+		<TimeStamp/>
+		<CodigoCertificado>GRAU_DISCAPACITAT_SIMPLE</CodigoCertificado>
+		<CodigoProducto>GRAU_DISCAPACITAT</CodigoProducto>
+		<DatosAutorizacion>
+			<IdentificadorSolicitante>9821920002</IdentificadorSolicitante>
+			<NombreSolicitante>CAOC</NombreSolicitante>
+			<Finalidad>PROVES</Finalidad>
+		</DatosAutorizacion>
+		<Emisor>
+			<NifEmisor>Q0840012I</NifEmisor>
+			<NombreEmisor>ICASS</NombreEmisor>
+		</Emisor>
+		<Funcionario>
+			<NombreCompletoFuncionario>FUNCIONARI</NombreCompletoFuncionario>
+			<NifFuncionario>NIF</NifFuncionario>
+			<EMailFuncionario/>
+		</Funcionario>
+	</Atributos>
+	<Solicitudes>
+		<SolicitudTransmision>
+			<DatosGenericos>
+				<Emisor>
+					<NifEmisor>Q0801175A</NifEmisor>
+					<NombreEmisor>CAOC</NombreEmisor>
+				</Emisor>
+				<Solicitante>
+					<IdentificadorSolicitante>9821920002</IdentificadorSolicitante>
+					<NombreSolicitante>CAOC</NombreSolicitante>
+					<Finalidad>PROVES</Finalidad>
+					<Consentimiento>Si</Consentimiento>
+					<Funcionario>
+						<NombreCompletoFuncionario>FUNCIONARI</NombreCompletoFuncionario>
+						<NifFuncionario>NIF</NifFuncionario>
+						<EMailFuncionario/>
+					</Funcionario>
+				</Solicitante>
+				<Titular>
+					<TipoDocumentacion>NIF</TipoDocumentacion>
+					<Documentacion>11001162D</Documentacion>
+					<NombreCompleto/>
+					<Nombre/>
+					<Apellido1/>
+					<Apellido2/>
+				</Titular>
+				<Transmision>
+					<CodigoCertificado>GRAU_DISCAPACITAT_SIMPLE</CodigoCertificado>
+					<IdSolicitud>1</IdSolicitud>
+					<IdTransmision>EXPEDIENT</IdTransmision>
+					<FechaGeneracion/>
+				</Transmision>
+			</DatosGenericos>
+			<DatosEspecificos/>
+		</SolicitudTransmision>
+	</Solicitudes>
+</Peticion>
+
+
+```
+
+### Exemple resposta
+
+```
+<res:Respuesta xmlns:res="http://gencat.net/scsp/esquemes/respuesta">
+	<res:Atributos>
+		<res:CodigoCertificado>GRAU_DISCAPACITAT_SIMPLE</res:CodigoCertificado>
+		<res:CodigoProducto>GRAU_DISCAPACITAT</res:CodigoProducto>
+		<res:IdPeticion>SAD_000</res:IdPeticion>
+		<res:IdSolicitanteOriginal/>
+		<res:NomSolicitanteOriginal/>
+		<res:NumElementos>1</res:NumElementos>
+		<res:TimeStamp>2010-02-24T08:38:27.866+01:00</res:TimeStamp>
+		<res:Emisor>
+			<res:NifEmisor>Q0840012I</res:NifEmisor>
+			<res:NombreEmisor>ICASS</res:NombreEmisor>
+		</res:Emisor>
+		<res:Estado>
+			<res:CodigoEstado>0003</res:CodigoEstado>
+			<res:CodigoEstadoSecundario/>
+			<res:LiteralError>OK</res:LiteralError>
+			<res:TiempoEstimadoRespuesta>0</res:TiempoEstimadoRespuesta>
+		</res:Estado>
+		<res:Funcionario>
+			<res:NombreCompletoFuncionario>FUNCIONARI</res:NombreCompletoFuncionario>
+			<res:NifFuncionario>NIF</res:NifFuncionario>
+			<res:EMailFuncionario/>
+			<res:CertificadoDigital/>
+		</res:Funcionario>
+	</res:Atributos>
+	<res:Transmisiones>
+		<res:TransmisionDatos>
+			<res:DatosGenericos>
+				<res:Emisor>
+					<res:NombreEmisor>CAOC</res:NombreEmisor>
+					<res:NifEmisor>Q0801175A</res:NifEmisor>
+				</res:Emisor>
+				<res:Solicitante>
+					<res:IdentificadorSolicitante>9821920002</res:IdentificadorSolicitante>
+					<res:NombreSolicitante>CAOC</res:NombreSolicitante>
+					<res:Finalidad>PROVES</res:Finalidad>
+					<res:Consentimiento>Si</res:Consentimiento>
+					<res:Funcionario>
+						<res:NombreCompletoFuncionario>FUNCIONARI</res:NombreCompletoFuncionario>
+						<res:NifFuncionario>NIF</res:NifFuncionario>
+						<res:EMailFuncionario/>
+						<res:CertificadoDigital/>
+					</res:Funcionario>
+				</res:Solicitante>
+				<res:Titular>
+					<res:TipoDocumentacion>NIF</res:TipoDocumentacion>
+					<res:Documentacion>11001162D</res:Documentacion>
+					<res:NombreCompleto/>
+					<res:Nombre/>
+					<res:Apellido1/>
+					<res:Apellido2/>
+				</res:Titular>
+				<res:Transmision>
+					<res:CodigoCertificado>GRAU_DISCAPACITAT_SIMPLE</res:CodigoCertificado>
+					<res:FechaGeneracion/>
+					<res:IdSolicitud>1</res:IdSolicitud>
+					<res:IdTransmision>EXPEDIENT</res:IdTransmision>
+				</res:Transmision>
+			</res:DatosGenericos>
+			<res:DatosEspecificos>
+				<dis:respostaConsultaDiscapacitatSimple xmlns:dis="http://www.aocat.net/discapacitat">
+					<dis:resposta>
+						<dis:reconeixement>SI</dis:reconeixement>
+						<dis:grupGrauDiscapacitat>2</dis:grupGrauDiscapacitat>
+						<dis:descripcioGrupGrauDiscapacitat>Discapacitat de 33 a 64%</dis:descripcioGrupGrauDiscapacitat>
+						<dis:missatge/>
+					</dis:resposta>
+					<dis:resultat>
+						<dis:codiResultat>0</dis:codiResultat>
+						<dis:descripcio>Operació realitzada correctament</dis:descripcio>
+					</dis:resultat>
+				</dis:respostaConsultaDiscapacitatSimple>
+			</res:DatosEspecificos>
+		</res:TransmisionDatos>
+	</res:Transmisiones>
+</res:Respuesta>
+
+
+
+```
+
+
+## Grau discapacitat avançades (GRAU_DISCAPACITAT_TOTAL)
+
+### Exemple petició
+```
+<Peticion xmlns="http://gencat.net/scsp/esquemes/peticion">
+	<Atributos>
+		<IdPeticion>SAD_001</IdPeticion>
+		<NumElementos>1</NumElementos>
+		<TimeStamp/>
+		<CodigoCertificado>GRAU_DISCAPACITAT_TOTAL</CodigoCertificado>
+		<CodigoProducto>GRAU_DISCAPACITAT</CodigoProducto>
+		<DatosAutorizacion>
+			<IdentificadorSolicitante>9821920002</IdentificadorSolicitante>
+			<NombreSolicitante>CAOC</NombreSolicitante>
+			<Finalidad>PROVES</Finalidad>
+		</DatosAutorizacion>
+		<Emisor>
+			<NifEmisor>Q0840012I</NifEmisor>
+			<NombreEmisor>ICASS</NombreEmisor>
+		</Emisor>
+		<Funcionario>
+			<NombreCompletoFuncionario>FUNCIONARI</NombreCompletoFuncionario>
+			<NifFuncionario>NIF</NifFuncionario>
+			<EMailFuncionario/>
+		</Funcionario>
+	</Atributos>
+	<Solicitudes>
+		<SolicitudTransmision>
+			<DatosGenericos>
+				<Emisor>
+					<NifEmisor>Q0801175A</NifEmisor>
+					<NombreEmisor>CAOC</NombreEmisor>
+				</Emisor>
+				<Solicitante>
+					<IdentificadorSolicitante>9821920002</IdentificadorSolicitante>
+					<NombreSolicitante>CAOC</NombreSolicitante>
+					<Finalidad>PROVES</Finalidad>
+					<Consentimiento>Si</Consentimiento>
+					<Funcionario>
+						<NombreCompletoFuncionario>FUNCIONARI</NombreCompletoFuncionario>
+						<NifFuncionario>NIF</NifFuncionario>
+						<EMailFuncionario/>
+					</Funcionario>
+				</Solicitante>
+				<Titular>
+					<TipoDocumentacion>NIF</TipoDocumentacion>
+					<Documentacion>11001162D</Documentacion>
+					<NombreCompleto/>
+					<Nombre/>
+					<Apellido1/>
+					<Apellido2/>
+				</Titular>
+				<Transmision>
+					<CodigoCertificado>GRAU_DISCAPACITAT_TOTAL</CodigoCertificado>
+					<IdSolicitud>1</IdSolicitud>
+					<IdTransmision>EXPEDIENT</IdTransmision>
+					<FechaGeneracion/>
+				</Transmision>
+			</DatosGenericos>
+			<DatosEspecificos/>
+		</SolicitudTransmision>
+	</Solicitudes>
+</Peticion>
+
+```
+
+### Exemple resposta
+
+```
+<res:Respuesta xmlns:res="http://gencat.net/scsp/esquemes/respuesta">
+	<res:Atributos>
+		<res:CodigoCertificado>GRAU_DISCAPACITAT_TOTAL</res:CodigoCertificado>
+		<res:CodigoProducto>GRAU_DISCAPACITAT</res:CodigoProducto>
+		<res:IdPeticion>SAD_001</res:IdPeticion>
+		<res:IdSolicitanteOriginal/>
+		<res:NomSolicitanteOriginal/>
+		<res:NumElementos>1</res:NumElementos>
+		<res:TimeStamp>2010-02-24T08:38:57.154+01:00</res:TimeStamp>
+		<res:Emisor>
+			<res:NifEmisor>Q0840012I</res:NifEmisor>
+			<res:NombreEmisor>ICASS</res:NombreEmisor>
+		</res:Emisor>
+		<res:Estado>
+			<res:CodigoEstado>0003</res:CodigoEstado>
+			<res:CodigoEstadoSecundario/>
+			<res:LiteralError>OK</res:LiteralError>
+			<res:TiempoEstimadoRespuesta>0</res:TiempoEstimadoRespuesta>
+		</res:Estado>
+		<res:Funcionario>
+			<res:NombreCompletoFuncionario>FUNCIONARI</res:NombreCompletoFuncionario>
+			<res:NifFuncionario>NIF</res:NifFuncionario>
+			<res:EMailFuncionario/>
+			<res:CertificadoDigital/>
+		</res:Funcionario>
+	</res:Atributos>
+	<res:Transmisiones>
+		<res:TransmisionDatos>
+			<res:DatosGenericos>
+				<res:Emisor>
+					<res:NombreEmisor>CAOC</res:NombreEmisor>
+					<res:NifEmisor>Q0801175A</res:NifEmisor>
+				</res:Emisor>
+				<res:Solicitante>
+					<res:IdentificadorSolicitante>9821920002</res:IdentificadorSolicitante>
+					<res:NombreSolicitante>CAOC</res:NombreSolicitante>
+					<res:Finalidad>PROVES</res:Finalidad>
+					<res:Consentimiento>Si</res:Consentimiento>
+					<res:Funcionario>
+						<res:NombreCompletoFuncionario>FUNCIONARI</res:NombreCompletoFuncionario>
+						<res:NifFuncionario>NIF</res:NifFuncionario>
+						<res:EMailFuncionario/>
+						<res:CertificadoDigital/>
+					</res:Funcionario>
+				</res:Solicitante>
+				<res:Titular>
+					<res:TipoDocumentacion>NIF</res:TipoDocumentacion>
+					<res:Documentacion>11001162D</res:Documentacion>
+					<res:NombreCompleto/>
+					<res:Nombre/>
+					<res:Apellido1/>
+					<res:Apellido2/>
+				</res:Titular>
+				<res:Transmision>
+					<res:CodigoCertificado>GRAU_DISCAPACITAT_TOTAL</res:CodigoCertificado>
+					<res:FechaGeneracion/>
+					<res:IdSolicitud>1</res:IdSolicitud>
+					<res:IdTransmision>EXPEDIENT</res:IdTransmision>
+				</res:Transmision>
+			</res:DatosGenericos>
+			<res:DatosEspecificos>
+				<dis:respostaConsultaDiscapacitatTotal xmlns:dis="http://www.aocat.net/discapacitat">
+					<dis:resposta>
+						<dis:reconeixement>SI</dis:reconeixement>
+						<dis:grauDiscapacitat>49</dis:grauDiscapacitat>
+						<dis:dataEfecte>14-05-2001</dis:dataEfecte>
+						<dis:baremDependencia>SI</dis:baremDependencia>
+						<dis:baremMobilitat>N</dis:baremMobilitat>
+						<dis:acompanyantTransport>N</dis:acompanyantTransport>
+						<dis:validesa>DEFINITIU</dis:validesa>
+						<dis:dataVenciment>0</dis:dataVenciment>
+						<dis:missatge/>
+					</dis:resposta>
+					<dis:resultat>
+						<dis:codiResultat>0</dis:codiResultat>
+						<dis:descripcio>Operació realitzada correctament</dis:descripcio>
+					</dis:resultat>
+				</dis:respostaConsultaDiscapacitatTotal>
+			</res:DatosEspecificos>
+		</res:TransmisionDatos>
+	</res:Transmisiones>
+</res:Respuesta>
+
+
+```
+
