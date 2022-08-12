@@ -2,6 +2,19 @@
 
 # **Via Oberta – Grau de discapacitat (ICASS)**
 
+## INDEX
+
+- [1. Introducció](#1)
+- [2. Transmissions de dades disponibles](#2)
+- [3. Missatgeria del servei](#3)
+   * [3.1 Grau de discapacitat – dades bàsiques (GRAU_DISCAPACITAT_SIMPLE)](#3.1)
+        * [3.1.1 Petició](#3.1.1)
+		* [3.1.2 Resposta – dades específiques](#3.1.2)
+   * [3.2 Grau de discapacitat – dades avançades (GRAU_DISCAPACITAT_TOTAL)](#3.2)
+        * [3.2.1 Petició](#3.2.1)
+		* [3.2.2 Resposta – dades específiques](#3.2.2)
+-  [4. Joc de proves](#4)
+
 
 **Històric de revisions**
 
@@ -11,7 +24,7 @@
 |V1.2 |07/10/2010 |RogerNogueraArnau |Revisió |
 
 
-# 1 Introducció
+# 1 Introducció <a name="1"></a>
 
 Aquest document detalla la missatgeria associada al servei de consulta del Grau de Discapacitat deldelServeialDisminuït(SAD)del&#39;InstitutCatalàd&#39;AssistènciaiServeisSocials(ICASSenendavant).
 
@@ -22,7 +35,7 @@ Per poder realitzar la integració cal conèixer prèviament la següent documen
 [PCI]:https://github.com/ConsorciAOC/PCI
 
 
-# 2 Transmissions de dades disponibles
+# 2 Transmissions de dades disponibles <a name="2"></a>
 
 Les dades disponibles a través del servei són les que es presenten a continuació:
 
@@ -39,14 +52,14 @@ Totes les consultes del producte tenen disponible la versió imprimible del resu
 
 [PCI2]:https://github.com/ConsorciAOC/PCI
 
-# 3	Missatgeria dels serveis
+# 3	Missatgeria del servei <a name="3"></a>
 
 A continuació es detalla la missatgeria corresponent al bloc de dades específiques de les modalitats de consum del producte.
 
-## 3.1	Grau de discapacitat – dades bàsiques (GRAU_DISCAPACITAT_SIMPLE)
+## 3.1	Grau de discapacitat – dades bàsiques (GRAU_DISCAPACITAT_SIMPLE) <a name="3.1"></a>
 
 
-### 3.1.1	Petició
+### 3.1.1	Petició <a name="3.1.1"></a>
 
 Aquesta modalitat permet consultar les dades bàsiques del grau de discapacitat d’un ciutadà informant:
 
@@ -77,7 +90,7 @@ En cas de no disposar del document identificatiu del titular, el servei permet f
 ![1](captures/1.png)
 
 
-### 3.1.2	Resposta – dades específiques
+### 3.1.2	Resposta – dades específiques <a name="3.1.2"></a>
 
 De l’schema associat a la resposta especifica, el servei informa les dades que es detallen a continuació.
 
@@ -117,7 +130,7 @@ Segons el valor de *reconeixement* vindran informats els següents camps:<br><li
 
 ## 3.2	Grau de discapacitat – dades avançades (GRAU_DISCAPACITAT_TOTAL)
     
-### 3.2.1 Petició
+### 3.2.1 Petició <a name="3.2.1"></a>
 
 Aquesta modalitat permet consultar les dades avançades del grau de discapacitat d’un ciutadà informant:<br><li>El document identificatiu del titular a les dades genèriques de la missatgeria.
 <li>Alternativament, informant les dades personals a la missatgeria específica.
@@ -146,7 +159,7 @@ Anàlogament a la modalitat anterior, en cas de no disposar del document identif
 ![3](captures/3.png)
 
     
-### 3.2.2	Resposta – dades específiques
+### 3.2.2	Resposta – dades específiques <a name="3.2.2"></a>
 
 De l’schema associat a la resposta especifica, el servei informa les dades que es detallen a continuació.
 
@@ -200,7 +213,7 @@ Segons el valor de l’element reconeixement s’informaran els següents elemen
 <ul><ul><li>Missatge (si l’expedient ha estat traslladat a altra comunitat).</ul></ul>
 
 
-# 4 Joc de proves
+# 4 Joc de proves <a name="4"></a>
 
 L&#39;emissor final publica els següent [joc de proves a l&#39;entorn de pre-producció][proves] 
 
