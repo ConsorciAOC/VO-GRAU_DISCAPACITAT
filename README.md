@@ -42,6 +42,7 @@ Les dades disponibles a través del servei són les que es presenten a continuac
 | --- | --- | --- |
 | **GRAU\_DISCAPACITAT** | GRAU\_DISCAPACITAT\_SIMPLE | Grau de discapacitat d’un ciutadà (dades bàsiques). |
 | **GRAU\_DISCAPACITAT** | GRAU\_DISCAPACITAT\_TOTAL | Grau de discapacitat d’un ciutadà (dades avançades). |
+| **GRAU\_DISCAPACITAT** | GRAU\_DISCAPACITAT\_AMPLIADA | Grau de discapacitat d’un ciutadà (dades avançades ampliades).|
 
 Totes les consultes del producte tenen disponible la versió imprimible del resultat de la consulta en format PDF. Per més detalls adreceu-vos a l’apartat *Extensions de missatgeria* del document de [missatgeria genèrica.][PCI2]
 
