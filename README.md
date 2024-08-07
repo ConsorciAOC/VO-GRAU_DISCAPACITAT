@@ -1,6 +1,6 @@
 # VO-GRAU_DISCAPACITAT Document d&#39;integració del servei
 
-# **Via Oberta – Grau de discapacitat (ICASS)**
+# **Via Oberta – Grau de discapacitat (Direcció General de l'Autonomia Personal i la Discapacitat)**
 
 ## INDEX
 
@@ -36,7 +36,7 @@ Les dades disponibles a través del servei són les que es presenten a continuac
 
 | **EMISSOR** |
 | --- |
-| ICASS (Institut Català d'Assistència i Serveis Socials) |
+| Direcció General de l'Autonomia Personal i la Discapacitat |
 
 | **PRODUCTE** | **MODALITAT** | **DESCRIPCIO** |
 | --- | --- | --- |
